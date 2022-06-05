@@ -1,5 +1,9 @@
 {
+    "name": "akenlab/phpunit-dojo-extension",
+    "description": "Feeds dojo events to an external monitoring tool",
+    "license": "WTFPL",
     "require": {
+        "php": ">=8.1",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
