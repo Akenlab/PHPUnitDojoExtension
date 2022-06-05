@@ -3,6 +3,8 @@
 namespace Akenlab;
 
 use Akenlab\DojoExtension\DojoAgent;
+use Akenlab\DojoExtension\DojoAgentDriver;
+use Akenlab\DojoExtension\DojoEvent;
 use Akenlab\DojoExtension\DojoListener;
 use Akenlab\DojoExtension\Events\TestsWereRun;
 use PHPUnit\Framework\TestCase;
@@ -23,5 +25,14 @@ class DojoExtensionTest extends TestCase
         $extension = new DojoListener($dojoAgent);
         $suite = $this->createMock(TestSuite::class);
         $extension->endTestSuite($suite);
+    }
+
+    public function test_agent_requires_a_driver()
+    {
+        $driver = $this->createMock(DojoAgentDriver::class);
+        $driver->expects($this->once())->method("dispatch");
+        $dojoAgent=new DojoAgent($driver);
+        $dojoAgent->dispatch(new DojoEvent());
+
     }
 }

@@ -26,9 +26,9 @@
         </include>
     </coverage>
     <!--<listeners>
-        <listener class="App\Dojo\DojoListener">
+        <listener class="Akenlab\DojoExtension\DojoListener">
             <arguments>
-                <object class="App\Dojo\DojoAgent"/>
+                <object class="Akenlab\DojoExtension\DojoAgent"/>
             </arguments>
         </listener>
     </listeners>-->
