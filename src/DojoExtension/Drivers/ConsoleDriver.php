@@ -9,7 +9,7 @@ class ConsoleDriver implements DojoAgentDriver
 {
     public function dispatch(DojoEvent $event): void
     {
-        var_dump($event);
+        var_dump($event->__serialize());
     }
 
 }

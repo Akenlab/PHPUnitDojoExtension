@@ -2,7 +2,7 @@
 
 namespace Akenlab\DojoExtension;
 
-class DojoEvent
+interface DojoEvent
 {
-
+    public function __serialize(): array;
 }

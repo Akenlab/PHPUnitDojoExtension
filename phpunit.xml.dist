@@ -28,8 +28,12 @@
     <!--<listeners>
         <listener class="Akenlab\DojoExtension\DojoListener">
             <arguments>
-                <object class="Akenlab\DojoExtension\DojoAgent"/>
+                <object class="Akenlab\DojoExtension\Drivers\ConsoleDriver" />
+                <string>TEAM1</string>
             </arguments>
         </listener>
-    </listeners>-->
+    </listeners>
+    <extensions>
+        <extension class="Akenlab\DojoExtension\DojoExtension" />
+    </extensions>-->
 </phpunit>

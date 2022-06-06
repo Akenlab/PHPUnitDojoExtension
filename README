@@ -8,20 +8,17 @@ This extension feeds the backend of your choice with events, to gather statistic
 
 `composer require akenlab/phpunit-dojo-extension`
 
-2. register the listener in your phpunit.xml :
+2. register the extension in your phpunit.xml :
 
 ```
 ...
-<listeners>
-    <listener class="Akenlab\DojoExtension\DojoListener">
+<extensions>
+    <extension class="Akenlab\DojoExtension\DojoExtension">
         <arguments>
-            <object class="Akenlab\DojoExtension\DojoAgent">
-                <arguments>
-                    <object class="Akenlab\DojoExtension\Drivers\ConsoleDriver" />
-                </arguments>
-            </object>
+            <object class="Akenlab\DojoExtension\Drivers\ConsoleDriver" />
+            <string>TEAM1</string>
         </arguments>
-    </listener>
+    </extension>
 </listeners>
 ...
 ```
