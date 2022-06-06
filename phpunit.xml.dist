@@ -25,15 +25,16 @@
             <directory suffix=".php">src</directory>
         </include>
     </coverage>
-    <!--<listeners>
-        <listener class="Akenlab\DojoExtension\DojoListener">
+    <!--<extensions>
+        <extension class="Akenlab\DojoExtension\DojoExtension">
             <arguments>
-                <object class="Akenlab\DojoExtension\Drivers\ConsoleDriver" />
+                <object class="Akenlab\DojoExtension\Drivers\HttpDriver">
+                    <arguments>
+                        <string>http://host.docker.internal:3000/api/dojoEvent</string>
+                    </arguments>
+                </object>
                 <string>TEAM1</string>
             </arguments>
-        </listener>
-    </listeners>
-    <extensions>
-        <extension class="Akenlab\DojoExtension\DojoExtension" />
+        </extension>
     </extensions>-->
 </phpunit>

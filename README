@@ -15,10 +15,14 @@ This extension feeds the backend of your choice with events, to gather statistic
 <extensions>
     <extension class="Akenlab\DojoExtension\DojoExtension">
         <arguments>
-            <object class="Akenlab\DojoExtension\Drivers\ConsoleDriver" />
+            <object class="Akenlab\DojoExtension\Drivers\HttpDriver">
+                <arguments>
+                    <string>http://host.docker.internal:3000/api/dojoEvent</string>
+                </arguments>
+            </object>
             <string>TEAM1</string>
         </arguments>
     </extension>
-</listeners>
+</extensions>
 ...
 ```
