@@ -7,6 +7,7 @@ use Akenlab\DojoExtension\DojoAgentDriver;
 use Akenlab\DojoExtension\DojoEvent;
 use Akenlab\DojoExtension\DojoExtension;
 use Akenlab\DojoExtension\Events\TestsWereRun;
+use Akenlab\DojoExtension\Events\TestsWillRun;
 use PHPUnit\Framework\TestCase;
 
 class DojoExtensionTest extends TestCase
@@ -16,12 +17,24 @@ class DojoExtensionTest extends TestCase
         $teamId = "MyTeamId";
         $dojoAgentDriver = $this->createMock(DojoAgentDriver::class);
 
+        $dojoAgentDriver->expects($this->once())->method("dispatch")->with($this->callback(function(TestsWillRun $event) use ($teamId){
+            return true;
+        }));
+        $extension = new DojoExtension($dojoAgentDriver,$teamId);
+        $extension->executeBeforeFirstTest();
+    }
+
+    public function test_extension_dispatches_metrics_on_each_test_suite_run()
+    {
+        $teamId = "MyTeamId";
+        $dojoAgentDriver = $this->createMock(DojoAgentDriver::class);
+
         $dojoAgentDriver->expects($this->once())->method("dispatch")->with($this->callback(function(TestsWereRun $event) use ($teamId){
             $this->assertEquals($teamId,$event->teamId());
             return true;
         }));
         $extension = new DojoExtension($dojoAgentDriver,$teamId);
-        $extension->executeBeforeFirstTest();
+        $extension->executeAfterLastTest();
     }
 
     public function test_agent_requires_a_driver()

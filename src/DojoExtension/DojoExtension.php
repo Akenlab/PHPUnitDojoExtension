@@ -3,12 +3,14 @@
 namespace Akenlab\DojoExtension;
 
 use Akenlab\DojoExtension\Events\TestsWereRun;
+use Akenlab\DojoExtension\Events\TestsWillRun;
+use PHPUnit\Runner\AfterLastTestHook;
 use PHPUnit\Runner\AfterSuccessfulTestHook;
 use PHPUnit\Runner\AfterTestErrorHook;
 use PHPUnit\Runner\AfterTestFailureHook;
 use PHPUnit\Runner\BeforeFirstTestHook;
 
-final class DojoExtension implements BeforeFirstTestHook,AfterTestErrorHook,AfterTestFailureHook,AfterSuccessfulTestHook
+final class DojoExtension implements BeforeFirstTestHook,AfterTestErrorHook,AfterTestFailureHook,AfterSuccessfulTestHook,AfterLastTestHook
 {
     private DojoAgent $dojoAgent;
 
@@ -19,7 +21,7 @@ final class DojoExtension implements BeforeFirstTestHook,AfterTestErrorHook,Afte
     }
     public function executeBeforeFirstTest(): void
     {
-        $event = new TestsWereRun($this->dojoAgent->teamId(),$this->dojoAgent->successCount(),$this->dojoAgent->failuresCount());
+        $event = new TestsWillRun($this->dojoAgent->teamId());
         $this->dojoAgent->dispatch($event);
     }
 
@@ -36,5 +38,10 @@ final class DojoExtension implements BeforeFirstTestHook,AfterTestErrorHook,Afte
     public function executeAfterSuccessfulTest(string $test, float $time):void
     {
         $this->dojoAgent->addSuccess();
+    }
+    public function executeAfterLastTest(): void
+    {
+        $event = new TestsWereRun($this->dojoAgent->teamId(),$this->dojoAgent->successCount(),$this->dojoAgent->failuresCount());
+        $this->dojoAgent->dispatch($event);
     }
 }
