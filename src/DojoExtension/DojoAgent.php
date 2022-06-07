@@ -32,7 +32,12 @@ class DojoAgent
 
     public function dispatch(DojoEvent $event)
     {
-        $this->driver->dispatch($event);
+        //We don't want the driver to block anything in case of a problem...
+        try{
+            $this->driver->dispatch($event);
+        }catch (\Exception $e){
+            //...so we just ignore any exception occuring
+        }
     }
 
     public function teamId()
