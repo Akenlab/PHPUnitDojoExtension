@@ -48,7 +48,7 @@ class TestsWereRun implements DojoEvent
             "teamId"=>$this->teamId,
             "successes"=>$this->successCount,
             "failures"=>$this->failuresCount,
-            "createtAt"=>$this->createdAt->format(\DateTimeInterface::ISO8601)
+            "createdAt"=>$this->createdAt->format(\DateTimeInterface::ISO8601)
         ];
     }
 }
