@@ -24,6 +24,7 @@ class HttpDriver implements DojoAgentDriver
             "POST",
             $this->eventStoreEndpoint,
             [
+                'timeout' => 1,
                 "json" => [
                     "payload" => $event->__serialize(),
                     "eventName"=>substr(strrchr(get_class($event), '\\'), 1)
