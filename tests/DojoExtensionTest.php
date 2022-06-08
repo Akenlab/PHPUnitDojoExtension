@@ -7,7 +7,7 @@ use Akenlab\DojoExtension\DojoAgentDriver;
 use Akenlab\DojoExtension\DojoEvent;
 use Akenlab\DojoExtension\DojoExtension;
 use Akenlab\DojoExtension\Events\TestsWereRun;
-use Akenlab\DojoExtension\Events\TestsWillRun;
+use Akenlab\DojoExtension\Events\TestRunnerStarted;
 use PHPUnit\Framework\TestCase;
 
 class DojoExtensionTest extends TestCase
@@ -17,7 +17,7 @@ class DojoExtensionTest extends TestCase
         $teamId = "MyTeamId";
         $dojoAgentDriver = $this->createMock(DojoAgentDriver::class);
 
-        $dojoAgentDriver->expects($this->once())->method("dispatch")->with($this->callback(function(TestsWillRun $event) use ($teamId){
+        $dojoAgentDriver->expects($this->once())->method("dispatch")->with($this->callback(function(TestRunnerStarted $event) use ($teamId){
             return true;
         }));
         $extension = new DojoExtension($dojoAgentDriver,$teamId);

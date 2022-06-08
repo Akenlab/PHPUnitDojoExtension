@@ -6,7 +6,7 @@ use Akenlab\DojoExtension\DojoEvent;
 use Ramsey\Uuid\Uuid;
 
 
-class TestsWillRun implements DojoEvent
+class TestRunnerStarted implements DojoEvent
 {
     private string $teamId;
     private string $id;

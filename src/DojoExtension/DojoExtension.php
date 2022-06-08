@@ -3,7 +3,7 @@
 namespace Akenlab\DojoExtension;
 
 use Akenlab\DojoExtension\Events\TestsWereRun;
-use Akenlab\DojoExtension\Events\TestsWillRun;
+use Akenlab\DojoExtension\Events\TestRunnerStarted;
 use PHPUnit\Runner\AfterLastTestHook;
 use PHPUnit\Runner\AfterSuccessfulTestHook;
 use PHPUnit\Runner\AfterTestErrorHook;
@@ -21,7 +21,7 @@ final class DojoExtension implements BeforeFirstTestHook,AfterTestErrorHook,Afte
     }
     public function executeBeforeFirstTest(): void
     {
-        $event = new TestsWillRun($this->dojoAgent->teamId());
+        $event = new TestRunnerStarted($this->dojoAgent->teamId());
         $this->dojoAgent->dispatch($event);
     }
 
