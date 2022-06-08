@@ -13,14 +13,16 @@ class TestsWereRun implements DojoEvent
     private int $successCount;
     private int $failuresCount;
     private \DateTimeImmutable $createdAt;
+    private string $teamName;
 
-    public function __construct(string $teamId,int $successes,int $failures)
+    public function __construct(string $teamId,string $teamName,int $successes,int $failures)
     {
         $this->createdAt=new \DateTimeImmutable();
         $this->id=Uuid::uuid4()->toString();
         $this->teamId = $teamId;
         $this->successCount=$successes;
         $this->failuresCount=$failures;
+        $this->teamName = $teamName;
     }
 
     public function teamId()
@@ -31,6 +33,11 @@ class TestsWereRun implements DojoEvent
     public function successCount()
     {
         return $this->successCount;
+    }
+
+    public function teamName()
+    {
+        return $this->teamName;
     }
 
     public function failuresCount()
@@ -46,6 +53,7 @@ class TestsWereRun implements DojoEvent
         return [
             "id"=>$this->id,
             "teamId"=>$this->teamId,
+            "teamName"=>$this->teamName,
             "successes"=>$this->successCount,
             "failures"=>$this->failuresCount,
             "createdAt"=>$this->createdAt->format(\DateTimeInterface::ISO8601)

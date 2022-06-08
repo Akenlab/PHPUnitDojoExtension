@@ -14,14 +14,14 @@ final class DojoExtension implements BeforeFirstTestHook,AfterTestErrorHook,Afte
 {
     private DojoAgent $dojoAgent;
 
-    public function __construct(DojoAgentDriver $driver,string $teamId)
+    public function __construct(DojoAgentDriver $driver,string $teamId,string $teamName)
     {
-        $dojoAgent=DojoAgent::instance($driver,$teamId);
+        $dojoAgent=DojoAgent::instance($driver,$teamId,$teamName);
         $this->dojoAgent = $dojoAgent;
     }
     public function executeBeforeFirstTest(): void
     {
-        $event = new TestRunnerStarted($this->dojoAgent->teamId());
+        $event = new TestRunnerStarted($this->dojoAgent->teamId(),$this->dojoAgent->teamName());
         $this->dojoAgent->dispatch($event);
     }
 
@@ -41,7 +41,7 @@ final class DojoExtension implements BeforeFirstTestHook,AfterTestErrorHook,Afte
     }
     public function executeAfterLastTest(): void
     {
-        $event = new TestsWereRun($this->dojoAgent->teamId(),$this->dojoAgent->successCount(),$this->dojoAgent->failuresCount());
+        $event = new TestsWereRun($this->dojoAgent->teamId(),$this->dojoAgent->teamName(),$this->dojoAgent->successCount(),$this->dojoAgent->failuresCount());
         $this->dojoAgent->dispatch($event);
     }
 }

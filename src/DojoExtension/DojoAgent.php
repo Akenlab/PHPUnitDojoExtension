@@ -11,10 +11,11 @@ class DojoAgent
     private static ?DojoAgent $_instance=null;
     private int $failuresCount=0;
     private int $successCount=0;
+    private string $teamName;
 
-    public static function instance(DojoAgentDriver $driver,string $teamId){
+    public static function instance(DojoAgentDriver $driver,string $teamId,string $teamName){
         if(!self::$_instance){
-            self::$_instance=new self($driver,$teamId);
+            self::$_instance=new self($driver,$teamId,$teamName);
         }
         return self::$_instance;
     }
@@ -24,10 +25,11 @@ class DojoAgent
         }
     }
 
-    private function __construct(DojoAgentDriver $driver,string $teamId)
+    private function __construct(DojoAgentDriver $driver,string $teamId,string $teamName)
     {
         $this->driver = $driver;
         $this->teamId = $teamId;
+        $this->teamName = $teamName;
     }
 
     public function dispatch(DojoEvent $event)
@@ -63,5 +65,11 @@ class DojoAgent
     public function addSuccess()
     {
         $this->successCount++;
+    }
+
+
+    public function teamName(): string
+    {
+        return $this->teamName;
     }
 }
