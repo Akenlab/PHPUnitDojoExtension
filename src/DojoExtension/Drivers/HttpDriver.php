@@ -20,7 +20,7 @@ class HttpDriver implements DojoAgentDriver
 
     public function dispatch(DojoEvent $event): void
     {
-        $this->httpClient->request("POST", $this->eventStoreEndpoint,["json"=>$event->__serialize()]);
+        $this->httpClient->request("POST", $this->eventStoreEndpoint,["json"=>["payload"=>$event->__serialize()]]);
     }
 
 }
