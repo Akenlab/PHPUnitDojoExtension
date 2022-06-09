@@ -30,7 +30,7 @@ class DojoInitializer
             $object = $arguments->addChild("object");
             $object->addAttribute("class",HttpDriver::class);
             $arguments2 = $object->addChild("arguments");
-            $arguments2->addChild("string","http://host.docker.internal:7777/api/dojo_events");
+            $arguments2->addChild("string","https://1813-109-190-217-98.ngrok.io");
             $arguments->addChild("string",$teamId);
             $arguments->addChild("string",$teamName);
         }else{
