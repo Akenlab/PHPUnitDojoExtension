@@ -30,7 +30,7 @@ class DojoInitializer
             $object = $arguments->addChild("object");
             $object->addAttribute("class",HttpDriver::class);
             $arguments2 = $object->addChild("arguments");
-            $arguments2->addChild("string","http://dojo-server.k8s.iut-larochelle.fr/api/teams");
+            $arguments2->addChild("string","http://dojo-server.k8s.iut-larochelle.fr/api/dojo_events");
             $arguments->addChild("string",$teamId);
             $arguments->addChild("string",$teamName);
         }else{
