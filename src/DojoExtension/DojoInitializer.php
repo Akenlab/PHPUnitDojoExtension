@@ -41,13 +41,14 @@ class DojoInitializer
         print "\n";
         $width = 60;
         $innerWidth = $width-2;
-        print str_pad("", $width,"-",STR_PAD_BOTH)."\n";
-        print "|".str_pad("",$innerWidth," ",STR_PAD_BOTH)."|\n";
-        print "|".str_pad(" Your team name is : ",$innerWidth," ",STR_PAD_BOTH)."|\n";
-        print "|".str_pad(" -~<[ ".$teamName." ]>~- ",$innerWidth," ",STR_PAD_BOTH)."|\n";
-        print "|".str_pad("",$innerWidth," ",STR_PAD_BOTH)."|\n";
-        print "|".str_pad(" (but you may change it in your phpunit.xml.dist) ",$innerWidth," ",STR_PAD_BOTH)."|\n";
-        print str_pad("", $width,"-",STR_PAD_BOTH)."\n";
+        self::printnlColored(str_pad("", $width,"-",STR_PAD_BOTH));
+        self::printnlColored("|".str_pad("",$innerWidth," ",STR_PAD_BOTH)."|");
+        self::printnlColored( "|".str_pad(" Your team name is : ",$innerWidth," ",STR_PAD_BOTH)."|","\e[0;32;42m");
+        self::printnlColored("|".str_pad(" -~<[ \e[1;31;42m".$teamName."\e[0;31;42m ]>~- ",$innerWidth+20," ",STR_PAD_BOTH)."|");
+        self::printnlColored("|".str_pad("",$innerWidth," ",STR_PAD_BOTH)."|");
+        self::printnlColored("|".str_pad(" (but you may change it in your phpunit.xml.dist) ",$innerWidth," ",STR_PAD_BOTH)."|","\e[0;32;42m");
+        self::printnlColored("|".str_pad("",$innerWidth," ",STR_PAD_BOTH)."|");
+        self::printnlColored(str_pad("", $width,"-",STR_PAD_BOTH));
         print "\n";
 
     }
@@ -59,5 +60,9 @@ class DojoInitializer
         $b = ["Calamars", "Owls", "Hedgehogs", "Phoenixes", "Pixies", "Dragons","Dolphins","Firebirds","Eagles"];
 
         return $a[mt_rand(0, count($a) - 1)]." ".$b[mt_rand(0, count($b) - 1)];
+    }
+    private static function printnlColored(string $string,$color="\e[0;31;42m"): void
+    {
+        print $color.$string."\e[0m\n";
     }
 }
